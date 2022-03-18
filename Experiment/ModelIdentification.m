@@ -100,7 +100,7 @@ for k=2:length(Name1)
      ylabel('Force (N)');
      hold on
      plot(x,F_l2_cal);
-     plot(s25p5v16.Displacment(:,2)*-1000,s25p5v16.Force,'LineWidth',2);
+%      plot(s25p5v16.Displacment(:,2)*-1000,s25p5v16.Force,'LineWidth',2);
      
      yyaxis right
     
@@ -122,7 +122,7 @@ for k=2:length(Name1)
     g2.Color(4)=0.2;
     plot(x,P_l2_cal);
     ylabel('Pressure(psi)');
-    plot(s25p5v16.Displacment(:,2)*-1000,s25p5v16.P_T.signals(1).values.*0.000145038,'LineWidth',2);
+%     plot(s25p5v16.Displacment(:,2)*-1000,s25p5v16.P_T.signals(1).values.*0.000145038,'LineWidth',2);
 %     plot(x,P_l2_cal,'LineWidth',2);
 %     hold on
     %     ylabel('Pressure (Pa)')
