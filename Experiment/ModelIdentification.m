@@ -23,9 +23,9 @@ Name1={'0','5','10','15'};
 Name2={'7','16','30'};
 name={'s25p5v7','s25p5v16','s25p5v30','s25p10v7','s25p10v16','s25p10v30','s25p15v7','s25p15v16','s25p15v30'};
 legendname=[];
-figure
-for k=2:length(Name1)
-    for u=2:length(Name2)
+% figure
+for k=1:length(Name1)
+    for u=1:length(Name2)
      name=append("s25p",Name1(k),"v",Name2(u));   
     tt=tt+1;
 %     if o==3
@@ -87,24 +87,22 @@ for k=2:length(Name1)
     fun = @(w)sseval(w,x,F);
     x0 = [40;0.5;1;1;1];
     options = optimset('MaxFunEvals',100000,'MaxIter',100000);
-    bestx = fminsearch(fun,x0,options)
+    bestx = fminsearch(fun,x0,options);
     F_l2_cal=CurveFun(bestx,x).*149.08;
     Fc = polyfit(x,F,3);
-%     F_l = polyval(Fc,x);
+
     F_cal= (F)*149.08;
-%     F_l_cal=(F_l)*149.08;
+
 %      figure
-     yyaxis left
-     g=plot(x, F_cal);
-     g.Color(4)=0.2;
-     ylabel('Force (N)');
-     hold on
-     plot(x,F_l2_cal);
-%      plot(s25p5v16.Displacment(:,2)*-1000,s25p5v16.Force,'LineWidth',2);
-     
-     yyaxis right
-    
-    
+%      yyaxis left
+%      g=plot(x, F_cal);
+%      g.Color(4)=0.2;
+%      ylabel('Force (N)');
+%      hold on
+%      plot(x,F_l2_cal);
+
+%      yyaxis right
+        
     %% pressure
 %     P=1036.5*newData(:,4)*1000-54603;
 
@@ -115,19 +113,11 @@ for k=2:length(Name1)
     bestxp = fminsearch(fun,x0,options);
     P_l2_cal=CurveFun(bestxp,x).*150.33;
     
-%     Pc = polyfit(x,P,3);
-%     P_l = polyval(Pc,x).*150.33;
-%     figure
-    g2=plot(x,P.*150.33);
-    g2.Color(4)=0.2;
-    plot(x,P_l2_cal);
-    ylabel('Pressure(psi)');
-%     plot(s25p5v16.Displacment(:,2)*-1000,s25p5v16.P_T.signals(1).values.*0.000145038,'LineWidth',2);
-%     plot(x,P_l2_cal,'LineWidth',2);
-%     hold on
-    %     ylabel('Pressure (Pa)')
-    %     title(['Chamber Pressure Veocity ',num2str(Vel),' mm/s'])
-%  legendname=[legendname,name(k)];
+%     g2=plot(x,P.*150.33);
+%     g2.Color(4)=0.2;
+%     plot(x,P_l2_cal);
+%     ylabel('Pressure(psi)');
+
 %% Stifness
 % figure
 
@@ -136,14 +126,14 @@ K=diff(F_l2_cal)./diff(x)*1000;
 % P_l = polyval(Kc,x(2:end));
 mdl = fitlm(x(2:end),K);
 R(k,u)=mdl.Rsquared.Ordinary;
-% plot(x(2:end),K,'LineWidth',2);
+plot(x(2:34:end),K(1:34:end),'LineWidth',2);
 
 hold on
     end
     title(append('Stiffness at ',Name1(k),'psi'))
     legend(Name2,'Location','northwest');
     ylabel('K (N/m)');
-    xlabel('Stroke (mm)');
+    xlabel('Displacment (mm)');
     figure
 end
 ylabel('Force (N)');
